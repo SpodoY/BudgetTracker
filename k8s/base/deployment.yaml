@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budget-tracker
+  namespace: budget-tracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: budget-tracker
+  template:
+    metadata:
+      labels:
+        app: budget-tracker
+    spec:
+      containers:
+        - name: budget-tracker
+          image: ghcr.io/spodoy/budgettracker:latest
+          ports:
+            - containerPort: 3000

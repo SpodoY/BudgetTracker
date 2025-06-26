@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: budget-tracker
+spec:
+  selector:
+    app: budget-tracker
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+      nodePort: 30069
+  type: NodePort
+  

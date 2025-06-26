@@ -1,0 +1,63 @@
+- name: Deploy GitOps Operator
+  hosts: vms
+  become: true
+  tasks:
+
+    - name: Update & Upgrade
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+
+    - name: Install Helm using Snap
+      community.general.snap:
+        name: helm
+        classic: true
+        state: present
+
+    - name: Create flux directory
+      ansible.builtin.file:
+        path: /opt/flux/
+        state: directory
+        mode: '755'
+
+    - name: Pull flux
+      ansible.builtin.get_url:
+        url: https://fluxcd.io/install.sh
+        dest: /opt/flux/
+        mode: '755'
+
+    - name: Install flux
+      ansible.builtin.command:
+        chdir: /opt/flux/
+        cmd: sudo . install.sh
+        creates: /opt/flux/
+
+    - name: Check if Flux is already bootstrapped
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Namespace
+        name: flux-system
+      register: flux_namespace
+      ignore_errors: true
+
+    # Kinda left this here for documentation but I don't wanna go through the burden of storing the token...
+#    - name: Bootstrap Flux on Github repository
+#      ansible.builtin.command:
+#        cmd: >
+#          flux bootstrap github
+#          --token-auth
+#          --owner=SpodoY
+#          --repository=BudgetTracker
+#          --branch=main
+#          --interval=1m0s
+#          --path=clusters/my-cluster
+#          --personal
+#          --private=false
+#          --timeout=5m
+#        environment:
+#          GITHUB_TOKEN: "{{ github_token }}"
+#        register: flux_bootstrap_result
+#        changed_when: "'flux-system' in flux_bootstrap_result.stdout"
+#        tags:
+#        - flux
+#        - bootstrap
