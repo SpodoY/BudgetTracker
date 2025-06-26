@@ -3,7 +3,6 @@
 FROM node:lts-alpine3.22 as base
 
 FROM base as deps
-RUN apk add --no-cache libc6-compact
 WORKDIR /app
 
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
