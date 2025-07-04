@@ -2,13 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: budget-tracker
+  namespace: budget-tracker
 spec:
   replicas: 3
   template:
     spec:
       containers:
         - name: budget-tracker
+          image: ghcr.io/spodoy/budgettracker:latest
           resources:
             limits:
-              memory: "512Mi"
+              memory: "512MMi"
               cpu: "500m"

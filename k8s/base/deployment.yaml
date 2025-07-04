@@ -4,7 +4,7 @@ metadata:
   name: budget-tracker
   namespace: budget-tracker
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: budget-tracker

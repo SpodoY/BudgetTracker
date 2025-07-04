@@ -4,10 +4,11 @@ metadata:
   name: budget-tracker-prod
   namespace: flux-system
 spec:
-  interval: 5m0s
-  path: k8s/overlays/prod
-  prune: true
+  interval: 10m
   sourceRef:
     kind: GitRepository
     name: flux-system
+  path: ./k8s/overlays/prod
+  prune: true
+  wait: true
   targetNamespace: prod
