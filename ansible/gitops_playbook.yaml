@@ -50,7 +50,7 @@
 #          --repository=BudgetTracker
 #          --branch=main
 #          --interval=1m0s
-#          --path=./k8s/clusters/
+#          --path=k8s/clusters
 #          --personal
 #          --private=false
 #          --timeout=5m
