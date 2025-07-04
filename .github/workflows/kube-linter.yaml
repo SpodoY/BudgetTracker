@@ -1,8 +1,11 @@
 name: Kube Linter
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
-      - '**'
+      - main
 #    paths:
 #      - 'k8s/**/*.yaml'
 

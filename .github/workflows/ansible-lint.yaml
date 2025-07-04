@@ -1,9 +1,12 @@
 name: Ansible Lint
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
-      - '**'
+      - main
 #    paths:
 #      - 'ansible/**/*.yaml'
 
