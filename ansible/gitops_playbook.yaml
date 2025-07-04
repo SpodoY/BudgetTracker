@@ -44,15 +44,15 @@
 #    - name: Bootstrap Flux on Github repository
 #      ansible.builtin.command:
 #        cmd: >
-#          flux bootstrap github
-#          --token-auth
-#          --owner=SpodoY
-#          --repository=BudgetTracker
-#          --branch=main
-#          --interval=1m0s
-#          --path=k8s/clusters
-#          --personal
-#          --timeout=5m
+#          flux bootstrap github \
+#          --token-auth \
+#          --owner=SpodoY \
+#          --repository=BudgetTracker \
+#          --branch=main \
+#          --interval=1m0s \
+#          --path=k8s/clusters/dev \
+#          --personal \
+#          --timeout=1m
 #        environment:
 #          GITHUB_TOKEN: "{{ github_token }}"
 #        register: flux_bootstrap_result
