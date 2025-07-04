@@ -1,0 +1,23 @@
+name: Kustomize Validate
+on:
+  pull_request:
+    paths:
+      - 'k8s/**/*.yaml'
+
+jobs:
+  kustomize-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          sudo mv kustomize /usr/local/bin/
+
+      - name: Validate Kustomize build
+        run: |
+          for dir in $(find ./k8s -type f -name 'kustomization.yaml' -exec dirname {} \;); do
+            echo "Validating $dir"
+            kustomize build "$dir" >/dev/null
+          done

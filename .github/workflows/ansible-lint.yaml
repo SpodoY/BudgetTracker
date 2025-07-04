@@ -1,0 +1,21 @@
+name: Ansible Lint
+
+on:
+  pull_request:
+    paths:
+      - 'ansible/**/*.yaml'
+
+jobs:
+  lint:
+    name: Lint Ansible YAML
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run ansible-lint on ansible/**/*.yaml
+        uses: ansible/ansible-lint@main
+        with:
+          setup_python: 'true'  # installs Python if needed
+          args: |
+            ansible/**/*.yaml
