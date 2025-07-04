@@ -1,0 +1,25 @@
+name: Kube Linter
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+#    paths:
+#      - 'k8s/**/*.yaml'
+
+jobs:
+  kube-linter:
+    name: Lint Kubernetes Manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install kube-linter
+        run: |
+          curl -sSL https://github.com/stackrox/kube-linter/releases/latest/download/kube-linter-linux.tar.gz | tar -xz
+          sudo mv kube-linter /usr/local/bin/
+
+      - name: Run kube-linter
+        run: kube-linter lint k8s/
