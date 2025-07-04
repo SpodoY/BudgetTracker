@@ -18,3 +18,9 @@ spec:
           image: ghcr.io/spodoy/budgettracker:latest
           ports:
             - containerPort: 3000
+          env:
+            - name: WEATHER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: weather-api-token
+                  key: WEATHER_API_KEY
