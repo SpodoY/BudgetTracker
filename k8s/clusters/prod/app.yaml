@@ -11,4 +11,4 @@ spec:
   path: ./k8s/overlays/prod
   prune: true
   wait: true
-  targetNamespace: budget-tracker-prod
+  targetNamespace: budget-tracker

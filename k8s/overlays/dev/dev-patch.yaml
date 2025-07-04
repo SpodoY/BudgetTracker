@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: budget-tracker
-  namespace: budget-tracker-dev
+  namespace: budget-tracker
 spec:
   replicas: 1
   template:
